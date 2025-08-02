@@ -4,8 +4,9 @@ from utils.web_utils import fetch_page
 def scrape_autokreso(part_number):
     url = f"https://www.autokreso.hr/?orderby=price&paged=1&s={part_number}+&post_type=product"
 
-    page = fetch_page(url)
+    print(f"[AutoKrešo] Scraping products for part number: {part_number}")
 
+    page = fetch_page(url)
     if not page: 
         return []
 
@@ -13,9 +14,12 @@ def scrape_autokreso(part_number):
 
     products_data = []
     products = soup.find_all("div", class_="product")
+
     if not products:
-        print("No products found for the given part number.")
+        print("[AutoKrešo] No products found for the given part number.")
         return []
+
+    print(f"[AutoKrešo] Found {len(products)} products for part number: {part_number}")
 
     for product in products:
         try:
@@ -24,12 +28,12 @@ def scrape_autokreso(part_number):
             price = product.find("div", class_="ProductPrice").text.strip()
 
             products_data.append({
-                "source": "autokreso"
+                "source": "autokreso",
                 "price": price,
                 "title": title,
                 "link": product_link,
             })
         except AttributeError as e:
-            print(f"Error parsing product data: {e}")
+            print(f"[Autokrešo] Error parsing product data: {e}")
             continue
     return products_data
