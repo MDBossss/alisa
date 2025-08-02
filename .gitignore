@@ -1,0 +1,64 @@
+# Python-specific ignores
+# ========================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+egg-info/
+*.egg
+.tox/
+
+# Virtual environment
+# -------------------
+# The venv directory is crucial to ignore because it contains
+# all the installed packages and is specific to your machine.
+# Anyone else setting up the project will create their own venv.
+venv/
+
+# Environment variables and sensitive data
+# ---------------------------------------
+# You might add a file for configuration or API keys later.
+# It's vital to ignore these.
+.env
+*.env
+
+# IDE-specific files
+# ===================
+# Ignore files created by common Integrated Development Environments.
+.idea/          # PyCharm/IntelliJ
+.vscode/        # VS Code
+*.sublime-project
+*.sublime-workspace
+.metadata/      # Eclipse
+
+# Operating System-specific ignores
+# =================================
+# Files created by various operating systems.
+.DS_Store       # macOS
+Thumbs.db       # Windows
+ehthumbs.db
+.Trash-* # macOS
+
+# Log files
+# =========
+# If your project generates logs, ignore them.
+*.log
+logs/
+
+# Data files and output
+# =====================
+# Ignore the generated output files from your scraper, such as Excel sheets.
+# This prevents large data files from cluttering your repository.
+# The scraped data should be considered an artifact of the script, not part of the source code.
+scraped_data.xlsx
+*.csv
+*.xlsx
