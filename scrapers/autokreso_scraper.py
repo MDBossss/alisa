@@ -4,7 +4,7 @@ from utils.web_utils import fetch_page
 def scrape_autokreso(part_number):
     url = f"https://www.autokreso.hr/?orderby=price&paged=1&s={part_number}+&post_type=product"
 
-    print(f"[AutoKrešo] Scraping products for part number: {part_number}")
+    print(f"[AutoKrešo] Scraping products for part number: {part_number}...")
 
     page = fetch_page(url)
     if not page: 
@@ -25,7 +25,7 @@ def scrape_autokreso(part_number):
         try:
             title = product.find("p", class_="product-title").find("a").text.strip()
             product_link = product.find("p", class_="product-title").find("a")["href"]
-            price = product.find("div", class_="ProductPrice").text.strip()
+            price = product.find("div", class_="ProductPrice").text.strip().replace(" ","")
 
             products_data.append({
                 "source": "autokreso",

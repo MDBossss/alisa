@@ -4,7 +4,7 @@ from utils.web_utils import fetch_page
 def scrape_impex(part_number):
     url = f"https://impexautodijelovi.hr/trazi?sort=priceAsc&search={part_number}"
 
-    print(f"[Impex] Scraping products for part number: {part_number}")
+    print(f"[Impex] Scraping products for part number: {part_number}...")
 
     page = fetch_page(url)
     if not page:
@@ -19,7 +19,7 @@ def scrape_impex(part_number):
         print("[Impex] No products found for the given part number.")
         return []
 
-    print(f"[Impex] Found {len(products_data)} products for part number: {part_number}")
+    print(f"[Impex] Found {len(products)} products for part number: {part_number}")
 
     for product in products:
         try:
