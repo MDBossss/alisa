@@ -3,6 +3,7 @@ from utils.xls_utils import save_to_excel
 from scrapers.autokreso_scraper import scrape_autokreso
 from scrapers.impex_scraper import scrape_impex
 from scrapers.autodoc_scraper import scrape_autodoc
+from scrapers.daparto_scraper import scrape_daparto
 
 # example part number: 55183562 
 

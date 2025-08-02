@@ -1,4 +1,3 @@
-import os
 from bs4 import BeautifulSoup
 from utils.cloudscraper_utils import fetch_cloudflare_page
 

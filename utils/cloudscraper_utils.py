@@ -19,6 +19,9 @@ HEADERS = {
 # Create a single scraper instance that can be reused across requests.
 # This makes it more efficient than creating a new one for every request.
 scraper = cloudscraper.create_scraper(
+    interpreter='js2py',  # Recommended for v3 challenges
+    delay=5,              # Allow more time for complex challenges
+    debug=True,            # Enable debug output to see v3 detection
     browser={
         'browser': 'chrome',
         'platform': 'windows',
