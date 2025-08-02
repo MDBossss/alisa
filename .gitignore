@@ -22,7 +22,8 @@ egg-info/
 # The venv directory is crucial to ignore because it contains
 # all the installed packages and is specific to your machine.
 # Anyone else setting up the project will create their own venv.
-venv/
+venv
+
 
 # Environment variables and sensitive data
 # ---------------------------------------
