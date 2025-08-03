@@ -11,11 +11,8 @@ def scrape_daparto(part_number):
     url = f"https://www.daparto.de/Teilenummernsuche/Teile/Alle-Hersteller/{part_number}?ref=fulltext&sort=price"
 
     cookies = {
-    "cart": "cookieId%1F426f786795f3a9b5ba52cb2357c18a7f5e33bbbf",
-    "cf_clearance": "GjJIfc822ODRnP8F9jumZgwhe.T0cmvz.uHVHtCibks-1754212627-1.2.1.1-KXIinLdFWJ1lWegUWyeqdFyQkJ4XctjeYVUGA_3LYguP5ssjb0Hww1O1cJYzEwmnXmu6ubo3aG5S9_hG1WRSmayOCWGv51eUcCcWShUB30qzBrlqMLplQOVbPUZLiITLYK2PmFAvnLShv3VT3CatGTFtaHwGqRbXKPmbb2IDV9VQ6T7v21mtUuzG2YrPCZZAZtQ.wLvPtf.J84j_1gR_wpXEOsRi_oqc8zZtUUSICVgF5XZJgsZq_Yj51umfeQ44",
-    "daparto": "lastRequest%1F2025-08-03T10%3A31%3A56%2B02%3A00%1ElastVisit%1F2025-08-02T20%3A39%3A19%2B02%3A00",
-    "project-daparto": "a268f99c3c9c9b503a6a86fa7afaec92"
-}
+    "cf_clearance": "hPkkbGnmg_iO3erk4qp2uyDBy7pqZehaKEzD0Dvz8Yg-1754220866-1.2.1.1-r58yRyIj_PoDvNutbzeJPb92Bco6y2sKXXyU9jts61k5hiqrzwmyn7lcSFbE_31duB3gnS8d74ec23a7wNt4YbZRdFYcl5F4qjxaSrubKWLk8hmk2DXxH9Aj2Q9J335MX7kh3MLHcWxRI_7vN3tKsAWyPuJyntqJHXfXbBhL.wLrCgVELvS0BJeyOCWMW9uOTztxtHB5NXiUORmhxDsh.lB.NoAsGzqmPivxcRiyP6VuAppjqXTeAazds6AL.aao",
+    }
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',

@@ -9,7 +9,7 @@ def clean_price(price_str):
         # Replace comma with period for decimal
         cleaned = cleaned.replace(',', '.')
         # Convert to float
-        return float(cleaned)
+        return f"{float(cleaned)}€"
     except (ValueError, TypeError) as e:
         print(f"Error cleaning price '{price_str}': {e}")
         return None  # Return None for invalid prices
