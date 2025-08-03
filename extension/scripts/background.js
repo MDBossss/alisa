@@ -12,6 +12,8 @@ function sendCfClearanceCookieToPopup() {
         domain: cfCookie.domain,
         partitionKey: cfCookie.partitionKey,
       });
+    } else {
+      chrome.runtime.sendMessage({ type: "cf_clearance_cookie_failed" });
     }
   });
 }

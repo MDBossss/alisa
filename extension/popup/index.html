@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cookie Logger</title>
+    <title>alisa</title>
+    <link rel="stylesheet" href="../styles/popup.css" />
   </head>
   <body>
-    <h1>Cookie Logger</h1>
-    <button id="readCookieBtn">Read All Cookies</button>
-    <p id="cookieValue">Click the button to check for the cookies.</p>
+    <div class="popup-container">
+      <h1 class="title">alisa</h1>
+      <textarea
+        id="partInput"
+        class="part-input"
+        rows="3"
+        placeholder="Enter part number(s)..."
+      ></textarea>
+      <button id="findPartsBtn" class="find-btn">Find Parts</button>
+      <div id="error" class="error" style="display: none"></div>
+      <div id="result" class="result"></div>
+    </div>
     <script src="../scripts/popup.js"></script>
   </body>
 </html>

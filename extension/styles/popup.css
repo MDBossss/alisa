@@ -1,0 +1,84 @@
+.success {
+  color: #16a34a;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 5px;
+  padding: 8px 10px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 0.98em;
+  display: block;
+}
+body {
+  background: #f7fafc;
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+}
+.popup-container {
+  padding: 20px 18px 18px 18px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  min-width: 280px;
+  max-width: 350px;
+}
+.title {
+  margin: 0 0 12px 0;
+  font-size: 1.6em;
+  color: #2d3748;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.part-input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1em;
+  margin-bottom: 12px;
+  resize: vertical;
+  background: #f1f5f9;
+  color: #2d3748;
+  box-sizing: border-box;
+}
+.find-btn {
+  width: 100%;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 10px;
+}
+.find-btn:hover {
+  background: #1d4ed8;
+}
+
+.find-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+.result {
+  margin-top: 10px;
+  font-size: 0.98em;
+  color: #374151;
+  word-break: break-all;
+}
+.error {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 5px;
+  padding: 8px 10px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 0.98em;
+  display: block;
+}
