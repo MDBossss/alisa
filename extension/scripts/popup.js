@@ -17,15 +17,38 @@ const errorDiv = document.getElementById("error");
 const resultDiv = document.getElementById("result");
 const partInput = document.getElementById("partInput");
 
+// Restore state on load
+window.addEventListener("DOMContentLoaded", function () {
+  partInput.value = localStorage.getItem("partInput") || "";
+  resultDiv.innerHTML = localStorage.getItem("resultDiv") || "";
+  errorDiv.innerHTML = localStorage.getItem("errorDiv") || "";
+  errorDiv.style.display = errorDiv.innerHTML ? "block" : "none";
+});
+
+// Save textarea on input
+partInput.addEventListener("input", function () {
+  localStorage.setItem("partInput", partInput.value);
+});
+
+// Helper functions to set and persist result/error
+function setResult(html) {
+  resultDiv.innerHTML = html;
+  localStorage.setItem("resultDiv", html);
+}
+function setError(html) {
+  errorDiv.innerHTML = html;
+  errorDiv.style.display = html ? "block" : "none";
+  localStorage.setItem("errorDiv", html);
+}
+
 findPartsBtn.addEventListener("click", function () {
   const partNumber = partInput.value.trim();
   if (!partNumber) {
-    errorDiv.textContent = "Please enter a part number.";
-    errorDiv.style.display = "block";
+    setError("Please enter a part number.");
     return;
   }
-  errorDiv.style.display = "none";
-  resultDiv.innerHTML = "";
+  setError("");
+  setResult("");
   findPartsBtn.disabled = true;
   findPartsBtn.textContent = "Loading...";
   // Store the part number for use in the message handler
@@ -37,7 +60,7 @@ findPartsBtn.addEventListener("click", function () {
 // Listen for cf_clearance cookie from background
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
   if (msg && msg.type === "cf_clearance_cookie") {
-    errorDiv.style.display = "none";
+    setError("");
     // Send to backend API
     const partNumber = findPartsBtn.dataset.partNumber || "";
     fetch("http://localhost:5000/trigger", {
@@ -53,24 +76,22 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
-          resultDiv.innerHTML = `<div class="success">${data.message}</div>`;
+          setResult(`<div class="success">${data.message}</div>`);
         } else {
-          resultDiv.innerHTML = `<div class="error">${
-            data.message || "Unknown error"
-          }</div>`;
+          setResult(
+            `<div class="error">${data.message || "Unknown error"}</div>`
+          );
         }
         findPartsBtn.disabled = false;
         findPartsBtn.textContent = "Find Parts";
       })
       .catch((err) => {
-        errorDiv.textContent = "Error sending to backend: " + err;
-        errorDiv.style.display = "block";
+        setError("Error sending to backend: " + err);
         findPartsBtn.disabled = false;
         findPartsBtn.textContent = "Find Parts";
       });
   } else if (msg && msg.type === "cf_clearance_cookie_failed") {
-    errorDiv.textContent = "Failed to read cf_clearance cookie.";
-    errorDiv.style.display = "block";
+    setError("Failed to read cf_clearance cookie.");
     findPartsBtn.disabled = false;
     findPartsBtn.textContent = "Find Parts";
   }
