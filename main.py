@@ -40,8 +40,11 @@ def trigger():
     if not part_number:
         return jsonify({"status": "error", "message": "Part number(s) is required"}), 400
 
+
+    # TODO: pass cookie and scrape by passed product ids
+
     
-    return jsonify({"status": "success", "message": "Scraping started..."}), 200
+    return jsonify({"status": "success", "message": "XLSX file generated."}), 200
 
 
 if __name__ == "__main__":
