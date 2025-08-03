@@ -1,7 +1,10 @@
 // Function to extract cf_clearance cookie with partitionKey and send to popup
 function sendCfClearanceCookieToPopup() {
   chrome.cookies.getAll({ partitionKey: {} }, function (cookies) {
-    const cfCookie = cookies.find((cookie) => cookie.name === "cf_clearance");
+    const cfCookie = cookies.find(
+      (cookie) =>
+        cookie.name === "cf_clearance" && cookie.domain.includes("daparto.de")
+    );
     if (cfCookie) {
       chrome.runtime.sendMessage({
         type: "cf_clearance_cookie",
