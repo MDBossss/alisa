@@ -13,9 +13,19 @@ chrome.permissions.contains(
 );
 
 const findPartsBtn = document.getElementById("findPartsBtn");
+const resetBtn = document.getElementById("resetBtn");
 const errorDiv = document.getElementById("error");
 const resultDiv = document.getElementById("result");
 const partInput = document.getElementById("partInput");
+// Reset button clears all states
+resetBtn.addEventListener("click", function () {
+  partInput.value = "";
+  setResult("");
+  setError("");
+  localStorage.removeItem("partInput");
+  localStorage.removeItem("resultDiv");
+  localStorage.removeItem("errorDiv");
+});
 
 // Restore state on load
 window.addEventListener("DOMContentLoaded", function () {
