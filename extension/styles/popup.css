@@ -112,3 +112,7 @@ body {
 .error-link {
   color: #dc2626 !important;
 }
+
+.success-link {
+  color: #16a34a !important;
+}

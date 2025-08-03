@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask import send_from_directory
+import os
 from flask_cors import CORS
 
 from utils.xls_utils import save_to_excel
@@ -45,12 +47,19 @@ def trigger():
 
     sorted_products = sorted(products, key=lambda x: float(x['price'].replace('€', '').strip()))
 
+    filename = f"parts_{date.today()}.xlsx"
     if sorted_products:
-        save_to_excel(sorted_products, sheet_name=f"p_{part_number}", filename=f"generated/parts_{date.today()}.xlsx")
+        save_to_excel(sorted_products, sheet_name=f"p_{part_number}", filename=f"generated/{filename}")
 
+    backend_url = "http://localhost:5000"
+    download_link = f'{backend_url}/download/{filename}'
     
-    return jsonify({"status": "success", "message": "XLSX file generated."}), 200
+    return jsonify({"status": "success", "message": f'XLSX file generated. <a href="{download_link}" class="success-link" target="_blank">Download here</a>'}), 200
 
+
+@app.route("/download/<filename>")
+def download_file(filename):
+    return send_from_directory(os.path.join(app.root_path, 'generated'), filename, as_attachment=True)
 
 if __name__ == "__main__":
     app.run(port=5000)
