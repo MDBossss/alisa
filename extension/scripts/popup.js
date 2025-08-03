@@ -52,8 +52,8 @@ function setError(html) {
 }
 
 findPartsBtn.addEventListener("click", function () {
-  const partNumber = partInput.value.trim();
-  if (!partNumber) {
+  const partNumbers = partInput.value.trim();
+  if (!partNumbers) {
     setError("Please enter a part number.");
     return;
   }
@@ -62,7 +62,7 @@ findPartsBtn.addEventListener("click", function () {
   findPartsBtn.disabled = true;
   findPartsBtn.textContent = "Loading...";
   // Store the part number for use in the message handler
-  findPartsBtn.dataset.partNumber = partNumber;
+  findPartsBtn.dataset.partNumbers = partNumbers;
   // Ask background to send cf_clearance cookie
   chrome.runtime.sendMessage({ type: "get_cf_clearance_cookie" });
 });
@@ -72,7 +72,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
   if (msg && msg.type === "cf_clearance_cookie") {
     setError("");
     // Send to backend API
-    const partNumber = findPartsBtn.dataset.partNumber || "";
+    const partNumbers = findPartsBtn.dataset.partNumbers || "";
     fetch("http://localhost:5000/trigger", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
         cf_clearance_cookie: msg.value,
         domain: msg.domain,
         partitionKey: msg.partitionKey,
-        part_number: partNumber,
+        part_number: partNumbers,
       }),
     })
       .then((res) => res.json())
