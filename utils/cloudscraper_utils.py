@@ -21,7 +21,7 @@ HEADERS = {
 scraper = cloudscraper.create_scraper(
     interpreter='js2py',  # Recommended for v3 challenges
     delay=5,              # Allow more time for complex challenges
-    debug=True,            # Enable debug output to see v3 detection
+    # debug=True,            # Enable debug output to see v3 detection
     browser={
         'browser': 'chrome',
         'platform': 'windows',
@@ -29,15 +29,16 @@ scraper = cloudscraper.create_scraper(
     }
 )
 
-def fetch_cloudflare_page(url):
+def fetch_cloudflare_page(url, cookies=None, headers=HEADERS):
     """
     Fetches a URL using cloudscraper to bypass Cloudflare protection.
     """
-    time.sleep(random.uniform(1, 3)) 
+    # time.sleep(random.uniform(1, 3)) 
+
 
     try:
         # Use the global scraper instance to make the request
-        page = scraper.get(url, headers=HEADERS, timeout=15)
+        page = scraper.get(url, headers=headers, timeout=15, cookies=cookies)
         page.raise_for_status() # Raise an exception for bad status codes
         return page
     except Exception as e:

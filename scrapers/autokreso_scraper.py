@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from utils.web_utils import fetch_page
+from utils.clean_price import clean_price
 
 def scrape_autokreso(part_number):
     url = f"https://www.autokreso.hr/?orderby=price&paged=1&s={part_number}+&post_type=product"
@@ -25,7 +26,7 @@ def scrape_autokreso(part_number):
         try:
             title = product.find("p", class_="product-title").find("a").text.strip()
             product_link = product.find("p", class_="product-title").find("a")["href"]
-            price = product.find("div", class_="ProductPrice").text.strip().replace(" ","")
+            price = clean_price(product.find("div", class_="ProductPrice").text.strip().replace(" ",""))
 
             products_data.append({
                 "source": "autokreso",

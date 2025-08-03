@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from utils.cloudscraper_utils import fetch_cloudflare_page
+from utils.clean_price import clean_price
 
 def scrape_autodoc(part_number):
     print(f"[Autodoc] Scraping products for part number: {part_number}...")
@@ -41,7 +42,7 @@ def scrape_autodoc(part_number):
             # Get the price element. It might be missing.
             price_element = product.find("div", class_="listing-item__price-new")
             if price_element:
-                price = price_element.text.strip()
+                price = clean_price(price_element.text.strip())
             else:
                 price = "Price Not Available"
             

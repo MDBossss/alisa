@@ -18,7 +18,7 @@ HEADERS = {
 }
 
 def fetch_page(url):
-    time.sleep(random.uniform(1, 3)) 
+    # time.sleep(random.uniform(1, 3)) 
 
     try:
         page = requests.get(url, headers=HEADERS, timeout=10)

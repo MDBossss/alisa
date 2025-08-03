@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from utils.web_utils import fetch_page
+from utils.clean_price import clean_price
 
 def scrape_impex(part_number):
     url = f"https://impexautodijelovi.hr/trazi?sort=priceAsc&search={part_number}"
@@ -25,7 +26,7 @@ def scrape_impex(part_number):
         try:
             title = product.find("h2", class_="heading").find("a").text.strip()
             product_link = product.find("h2", class_="heading").find("a")["href"]
-            price = product.find("span", class_="price__primary").text.strip()
+            price = clean_price(product.find("span", class_="price__primary").text.strip())
 
             products_data.append({
                 "source": "impex",
