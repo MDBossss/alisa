@@ -1,0 +1,20 @@
+{
+  "name": "alisa",
+  "description": "Find the best price for your car parts",
+  "version": "1.0",
+  "manifest_version": 3,
+  "host_permissions": ["<all_urls>"],
+  "permissions": ["cookies", "tabs", "webRequest", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_icon": "images/alisa.png"
+  },
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "icons": {
+    "16": "images/alisa.png",
+    "48": "images/alisa.png",
+    "128": "images/alisa.png"
+  }
+}

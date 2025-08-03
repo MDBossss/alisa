@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>alisa</title>
+    <link rel="stylesheet" href="../styles/popup.css" />
+  </head>
+  <body>
+    <div class="popup-container">
+      <h1 class="title">alisa</h1>
+      <textarea
+        id="partInput"
+        class="part-input"
+        rows="3"
+        placeholder="Enter part number(s)..."
+      ></textarea>
+      <div class="button-row">
+        <button id="findPartsBtn" class="find-btn">Find Parts</button>
+        <button id="resetBtn" class="reset-btn" title="Reset" type="button">
+          C
+        </button>
+      </div>
+      <div id="error" class="error" style="display: none"></div>
+      <div id="result" class="result"></div>
+    </div>
+    <script src="../scripts/popup.js"></script>
+  </body>
+</html>
