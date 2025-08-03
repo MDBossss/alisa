@@ -1,30 +1,18 @@
 from flask import Flask, request, jsonify
+from flask import send_from_directory
+import os
 from flask_cors import CORS
 
-# from utils.xls_utils import save_to_excel
+from utils.xls_utils import save_to_excel
+from datetime import date
 
-# from scrapers.autokreso_scraper import scrape_autokreso
-# from scrapers.impex_scraper import scrape_impex
-# from scrapers.autodoc_scraper import scrape_autodoc
-# from scrapers.daparto_scraper import scrape_daparto
+from scrapers.autokreso_scraper import scrape_autokreso
+from scrapers.impex_scraper import scrape_impex
+from scrapers.autodoc_scraper import scrape_autodoc
+from scrapers.daparto_scraper import scrape_daparto
 
 # # example part number: 55183562 
 
-# partNumber = 55183562
-
-# products_impex = scrape_impex(partNumber)
-# products_kreso = scrape_autokreso(partNumber)
-# products_autodoc = scrape_autodoc(partNumber)
-# products_daparto = scrape_daparto(partNumber)
-
-# products = products_kreso + products_impex + products_autodoc + products_daparto
-
-# sorted_products = sorted(products, key=lambda x: float(x['price'].replace('€', '').strip()))
-
-
-# if sorted_products:
-#     save_to_excel(sorted_products, sheet_name=partNumber, filename=f"parts_list.xlsx")
-    
 app = Flask(__name__)
 CORS(app)
 
@@ -41,11 +29,37 @@ def trigger():
         return jsonify({"status": "error", "message": "Part number(s) is required"}), 400
 
 
-    # TODO: pass cookie and scrape by passed product ids
+    try:
+        # daparto first, if returns 403, redo cookie and dont start others
+        products_daparto = scrape_daparto(part_number, cookie=cf_clearance_cookie)
 
+        products_impex = scrape_impex(part_number)
+        products_kreso = scrape_autokreso(part_number)
+        products_autodoc = scrape_autodoc(part_number)
+     
+    except ValueError:
+        return jsonify({
+            "status": "error",
+            "message": 'Open <a href="https://www.daparto.de/" class="error-link" target="_blank">Daparto</a> again, bad cookie. '
+        }), 400
+
+    products = products_kreso + products_impex + products_autodoc + products_daparto
+
+    sorted_products = sorted(products, key=lambda x: float(x['price'].replace('€', '').strip()))
+
+    filename = f"parts_{date.today()}.xlsx"
+    if sorted_products:
+        save_to_excel(sorted_products, sheet_name=f"p_{part_number}", filename=f"generated/{filename}")
+
+    backend_url = "http://localhost:5000"
+    download_link = f'{backend_url}/download/{filename}'
     
-    return jsonify({"status": "success", "message": "XLSX file generated."}), 200
+    return jsonify({"status": "success", "message": f'XLSX file generated. <a href="{download_link}" class="success-link" target="_blank">Download here</a>'}), 200
 
+
+@app.route("/download/<filename>")
+def download_file(filename):
+    return send_from_directory(os.path.join(app.root_path, 'generated'), filename, as_attachment=True)
 
 if __name__ == "__main__":
     app.run(port=5000)

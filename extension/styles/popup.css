@@ -108,3 +108,11 @@ body {
   font-size: 0.98em;
   display: block;
 }
+
+.error-link {
+  color: #dc2626 !important;
+}
+
+.success-link {
+  color: #16a34a !important;
+}
