@@ -5,13 +5,13 @@ from utils.cloudscraper_utils import fetch_cloudflare_page
 from utils.clean_price import clean_price
 
 
-def scrape_daparto(part_number):
+def scrape_daparto(part_number, cookie=None):
     print(f"[Daparto] Scraping products for part number: {part_number}...")
 
     url = f"https://www.daparto.de/Teilenummernsuche/Teile/Alle-Hersteller/{part_number}?ref=fulltext&sort=price"
 
     cookies = {
-    "cf_clearance": "hPkkbGnmg_iO3erk4qp2uyDBy7pqZehaKEzD0Dvz8Yg-1754220866-1.2.1.1-r58yRyIj_PoDvNutbzeJPb92Bco6y2sKXXyU9jts61k5hiqrzwmyn7lcSFbE_31duB3gnS8d74ec23a7wNt4YbZRdFYcl5F4qjxaSrubKWLk8hmk2DXxH9Aj2Q9J335MX7kh3MLHcWxRI_7vN3tKsAWyPuJyntqJHXfXbBhL.wLrCgVELvS0BJeyOCWMW9uOTztxtHB5NXiUORmhxDsh.lB.NoAsGzqmPivxcRiyP6VuAppjqXTeAazds6AL.aao",
+    "cf_clearance": cookie,
     }
 
     headers = {
@@ -37,9 +37,9 @@ def scrape_daparto(part_number):
     }
 
 
-    page = fetch_cloudflare_page(url,cookies=cookies, headers=headers)
+    page = fetch_cloudflare_page(url, cookies=cookies, headers=headers)
     if not page:
-        return []
+        raise ValueError("Daparto fetch failed (possible 403 or bad cookie)")
 
     soup = BeautifulSoup(page.content, "html.parser")
 

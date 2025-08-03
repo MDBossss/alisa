@@ -108,3 +108,7 @@ body {
   font-size: 0.98em;
   display: block;
 }
+
+.error-link {
+  color: #dc2626 !important;
+}
