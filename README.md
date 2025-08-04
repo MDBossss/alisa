@@ -4,6 +4,10 @@
 
 ---
 
+<img width="11992" height="4840" alt="image" src="https://github.com/user-attachments/assets/152b0c20-def8-4900-a921-5824d6f2a91f" />
+
+
+
 ## Features
 
 - 🔍 **Multi-site price comparison**: Scrapes prices for your part numbers from Autodoc, Daparto, Impex, and Autokrešo.
