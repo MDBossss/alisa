@@ -1,7 +1,9 @@
-name: Build & Release Windows EXE
+name: Build Windows EXE
 
 permissions:
   contents: write
+
+on:
   workflow_dispatch:
     inputs:
       version:
