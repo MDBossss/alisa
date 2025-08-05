@@ -66,7 +66,8 @@ def trigger():
 
 @app.route("/download/<filename>")
 def download_file(filename):
-return send_from_directory(os.path.join(os.getcwd(), 'generated'), filename, as_attachment=True)
+    return send_from_directory(os.path.join(os.getcwd(), 'generated'), filename, as_attachment=True)
+    
 if __name__ == "__main__":
     app.run(port=5000)
     print("Server is running on port 5000")

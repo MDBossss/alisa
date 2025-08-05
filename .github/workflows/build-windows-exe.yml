@@ -1,4 +1,4 @@
-name: Build Windows EXE
+name: Build & Release Windows EXE
 
 permissions:
   contents: write
