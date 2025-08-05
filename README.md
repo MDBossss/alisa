@@ -34,7 +34,7 @@
 
 ## Windows EXE Build (GitHub Actions)
 
-A GitHub Actions workflow is set up to build a standalone Windows executable (`.exe`) from the Python code using PyInstaller. To build the EXE, trigger the workflow manually from the GitHub Actions tab. The resulting EXE can be downloaded from the workflow run's "Artifacts" section on GitHub.
+A GitHub Actions workflow is set up to build a standalone Windows executable (`.exe`) from the Python code using PyInstaller. To build and release the EXE, trigger the workflow manually from the GitHub Actions tab. This will create a new version release under the Releases tab, where you can download the EXE and the soruce code needed for the extension.
 
 ---
 
