@@ -1,7 +1,14 @@
+on:
+
 name: Build Windows EXE
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., 0.1, 0.2)'
+        required: true
+        default: '0.1'
 
 jobs:
   build:
@@ -23,10 +30,34 @@ jobs:
 
       - name: Build EXE with PyInstaller
         run: |
-          pyinstaller --onefile main.py
+          # Use the icon at extension/images/alisa.ico for the EXE file
+          if [ -f extension/images/alisa.ico ]; then
+            pyinstaller --onefile --name alisa --icon extension/images/alisa.ico main.py
+          else
+            pyinstaller --onefile --name alisa main.py
+          fi
 
       - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
           name: alisa-windows-exe
-          path: dist/main.exe
+          path: dist/alisa.exe
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.event.inputs.version }}
+          name: Release v${{ github.event.inputs.version }}
+          body: |
+            Automated release for version v${{ github.event.inputs.version }}.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload EXE to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.event.inputs.version }}
+          name: Release v${{ github.event.inputs.version }}
+          files: dist/alisa.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -55,6 +55,8 @@ def trigger():
     # Write all results to a single Excel file with multiple sheets
     filename = f"parts_{date.today()}.xlsx"
     excel_path = f"generated/{filename}"
+    # Ensure the directory exists
+    os.makedirs("generated", exist_ok=True)
     save_to_excel(all_results, filename=excel_path)
 
     backend_url = "http://localhost:5000"
