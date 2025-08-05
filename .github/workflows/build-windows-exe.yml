@@ -27,6 +27,7 @@ jobs:
           pip install pyinstaller
 
       - name: Build EXE with PyInstaller
+        shell: bash
         run: |
           # Use the icon at extension/images/alisa.ico for the EXE file
           if [ -f extension/images/alisa.ico ]; then
