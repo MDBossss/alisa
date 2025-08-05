@@ -1,8 +1,16 @@
-# ALISA - Car Parts Price Comparison Tool
+<p align="center">
+  <img width="64" height="64" alt="image" src="https://github.com/user-attachments/assets/cfcec8e3-ce53-4243-b4ec-c858be7fadf2" />
+</p>
+
+<h1 align="center">ALISA - Find the best price for your car parts</h1>
 
 **ALISA** is an open-source tool for quickly comparing car part prices across multiple European retailers. Enter one or more part numbers, and ALISA will automatically scrape prices and availability from several online shops, then generate a downloadable Excel file with all results, sorted by price.
 
 ---
+
+<img width="11992" height="4840" alt="image" src="https://github.com/user-attachments/assets/152b0c20-def8-4900-a921-5824d6f2a91f" />
+
+
 
 ## Features
 
