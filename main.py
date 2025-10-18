@@ -37,7 +37,6 @@ def trigger():
     for part_number in part_numbers:
         try:
             # daparto first, if returns 403, redo cookie and dont start others
-            products_daparto = scrape_daparto(part_number, cookie=cf_clearance_cookie)
             products_impex = scrape_impex(part_number)
             products_kreso = scrape_autokreso(part_number)
             products_autodoc = scrape_autodoc(part_number)
@@ -47,7 +46,7 @@ def trigger():
                 "message": 'Open <a href="https://www.daparto.de/" class="error-link" target="_blank">Daparto</a> again, bad cookie. '
             }), 400
 
-        products = products_kreso + products_impex + products_autodoc + products_daparto
+        products = products_kreso + products_impex + products_autodoc 
         sorted_products = sorted(products, key=lambda x: float(x['price'].replace('€', '').strip()))
         all_results[part_number] = sorted_products
         time.sleep(1)  # 1 second delay between scrapes
